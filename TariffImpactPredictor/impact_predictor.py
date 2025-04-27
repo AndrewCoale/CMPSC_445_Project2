@@ -3,10 +3,14 @@ import pandas as pd
 import numpy as np
 import joblib
 import plotly.graph_objects as go
+import os
 
-# Load trained models
-gdp_model = joblib.load("gdp_model.pkl")
-inflation_model = joblib.load("inflation_model.pkl")
+# Find correct path
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Load models safely
+gdp_model = joblib.load(os.path.join(CURRENT_DIR, "gdp_model.pkl"))
+inflation_model = joblib.load(os.path.join(CURRENT_DIR, "inflation_model.pkl"))
 
 # Extract categories from the model's encoder
 encoder = gdp_model.named_steps["preprocessor"].named_transformers_["cat"]
